@@ -28,17 +28,32 @@ export default function Board() {
   }, []);
 
   useEffect(() => {
-    winningSequences.forEach((sequences) => {
-      console.log(sequences);
-      if (JSON.stringify(xValues) == JSON.stringify(sequences)) {
-        console.log(xValues);
+    let winnerDeclared = false;
+
+    winningSequences.forEach((sequence) => {
+      if (sequence.every((val) => xValues.includes(val))) {
         alert("Player X won!");
+        winnerDeclared = true;
+        resetGame();
       }
-      if (JSON.stringify(yValues) == JSON.stringify(sequences)) {
-        alert("Player Y Won!!");
+      if (sequence.every((val) => yValues.includes(val))) {
+        alert("Player Y won!");
+        winnerDeclared = true;
+        resetGame();
       }
     });
-  }, [xValues, yValues]);
+
+    if (!winnerDeclared && board.every((square) => square !== "")) {
+      alert("It's a draw!");
+      resetGame();
+    }
+  }, [xValues, yValues, board]);
+
+  function resetGame() {
+    setXValues([]);
+    setYValues([]);
+    setBoard(Array(9).fill(""));
+  }
 
   function DrawBoard() {
     return board.map((value, index) => (
@@ -70,6 +85,7 @@ export default function Board() {
   return (
     <>
       <h3>Player {player} turn</h3>
+
       <div className={styles.gameboard}>
         <DrawBoard />
       </div>
