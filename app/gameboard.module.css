@@ -1,0 +1,27 @@
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  background-color: red;
+}
+
+.squares {
+  background-color: blue;
+  border-width: 5px;
+  border-color: black;
+  border-style: solid;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.squares:hover {
+  background-color: aqua;
+  cursor: pointer;
+}
+
+.player {
+  color: white;
+}
